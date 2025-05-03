@@ -10,4 +10,5 @@ public class MovieWatchlistApplication {
 		SpringApplication.run(MovieWatchlistApplication.class, args);
 	}
 
+
 }
