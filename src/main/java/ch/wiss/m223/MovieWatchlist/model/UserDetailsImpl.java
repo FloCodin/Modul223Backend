@@ -16,7 +16,7 @@ public class UserDetailsImpl implements UserDetails {
     @Serial
     private static final long serialVersionUID = 1L;
     @Getter
-    private Long id;
+    private final Long id;
     private final String username;
     @Getter
     private final String email;
