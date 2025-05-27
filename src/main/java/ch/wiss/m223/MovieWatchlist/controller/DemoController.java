@@ -21,6 +21,7 @@ public class DemoController {
 
     @GetMapping(path = "public")
     public ResponseEntity<String> getPublicPage() {
+//        Thread.sleep(1000);
         return ResponseEntity.ok()
                 .body("Public page lalelu");
     }
