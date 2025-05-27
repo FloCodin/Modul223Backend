@@ -17,8 +17,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfiguration {
 
     @Autowired
@@ -59,10 +61,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(HttpMethod.POST, "/items").hasRole("ADMIN");
                     auth.requestMatchers(EVERYONE).permitAll()
+                            .requestMatchers("/api/tmdb/**").permitAll()
                             .anyRequest().authenticated();
                 })
-                .formLogin(Customizer.withDefaults())  //für Login-Form im Browser
-                .httpBasic(Customizer.withDefaults()); // für CURL, Postman, Insomnia
+                //.formLogin(Customizer.withDefaults())  //für Login-Form im Browser
+              ; // für CURL, Postman, Insomnia
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(),
                 UsernamePasswordAuthenticationFilter.class);
