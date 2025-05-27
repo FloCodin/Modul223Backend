@@ -51,6 +51,7 @@ public class SecurityConfiguration {
         return authConfig.getAuthenticationManager();
     }
 
+
     private static final String[] EVERYONE = {"/public", "/api/auth/*",};
 
     @Bean
