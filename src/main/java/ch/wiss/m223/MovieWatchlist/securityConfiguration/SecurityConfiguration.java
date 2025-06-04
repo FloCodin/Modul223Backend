@@ -52,7 +52,7 @@ public class SecurityConfiguration {
     }
 
 
-    private static final String[] EVERYONE = {"/public", "/api/auth/*",};
+    private static final String[] EVERYONE = {"/", "/public", "/api/auth/*",};
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http)

@@ -28,10 +28,10 @@ public class WatchlistService {
         return userRepository.findByUsername(username).orElseThrow();
     }
 
-    public void addToWatchlist(Long movieId) {
+    public void addToWatchlist(WatchlistItemDto movie) {
         User user = getCurrentUser();
-        if (!watchlistRepository.existsByUserAndMovieId(user, movieId)) {
-            WatchlistEntry entry = new WatchlistEntry(user, movieId);
+        if (!watchlistRepository.existsByUserAndMovieId(user, movie.getId())) {
+            WatchlistEntry entry = new WatchlistEntry(user, movie.getId(), movie.getTitle(), movie.getPosterPath());
             watchlistRepository.save(entry);
         }
     }
@@ -49,7 +49,7 @@ public class WatchlistService {
                 .map(entry -> {
                     Optional<Rating> ratingOpt = ratingRepository.findByUserAndMovieId(user, entry.getMovieId());
                     Rating rating = ratingOpt.orElse(null);
-                    return new WatchlistItemDto(entry.getMovieId(), rating);
+                    return new WatchlistItemDto(entry.getMovieId(), entry.getTitle(), entry.getPosterPath(), rating);
                 })
                 .collect(Collectors.toList());
     }

@@ -1,5 +1,9 @@
 package ch.wiss.m223.MovieWatchlist.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter @Getter
 public class RatingDTO {
     public Long movieId;
     public int score;

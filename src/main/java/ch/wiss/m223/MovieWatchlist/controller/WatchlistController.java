@@ -1,5 +1,6 @@
 package ch.wiss.m223.MovieWatchlist.controller;
 
+import ch.wiss.m223.MovieWatchlist.dto.WatchlistEntryDto;
 import ch.wiss.m223.MovieWatchlist.dto.WatchlistItemDto;
 import ch.wiss.m223.MovieWatchlist.model.UserDetailsImpl;
 import ch.wiss.m223.MovieWatchlist.services.WatchlistService;
@@ -18,10 +19,10 @@ public class WatchlistController {
     @Autowired
     private WatchlistService watchlistService;
 
-    @PostMapping("/{movieId}")
+    @PostMapping("/")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public void addToWatchlist(@PathVariable Long movieId) {
-        watchlistService.addToWatchlist(movieId);
+    public void addToWatchlist(@RequestBody WatchlistItemDto movie) {
+        watchlistService.addToWatchlist(movie);
     }
 
     @DeleteMapping("/{movieId}")
@@ -35,4 +36,12 @@ public class WatchlistController {
     public List<WatchlistItemDto> getWatchlist() {
         return watchlistService.getMyWatchlist();
     }
+
+    @GetMapping("/me")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public List<WatchlistItemDto> getMyWatchlist() {
+        return watchlistService.getMyWatchlist();
+    }
+
+
 }

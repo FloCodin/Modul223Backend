@@ -23,7 +23,13 @@ public class WatchlistEntry implements Serializable {
 
     private Long movieId;
 
-    public WatchlistEntry(User user, Long movieId) {
+    private String title;
+
+    private String posterPath;
+
+    public WatchlistEntry(User user, Long movieId, String title, String posterPath) {
+        this.posterPath = posterPath;
+        this.title = title;
         this.user = user;
         this.movieId = movieId;
     }

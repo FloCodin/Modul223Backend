@@ -11,14 +11,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WatchlistItemDto {
-    private Long movieId;
+    private Long id;
     private String title;
     private String posterPath;
     private Integer score;    // optional
     private String comment;   // optional
 
-    public WatchlistItemDto(Long movieId, Rating rating) {
-        this.movieId = movieId;
+    public WatchlistItemDto(Long id, String title, String posterPath, Rating rating) {
+        this.id = id;
+        this.title = title;
+        this.posterPath = posterPath;
         if (rating != null) {
             this.score = rating.getScore();
             this.comment = rating.getComment();
